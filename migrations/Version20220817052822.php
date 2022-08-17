@@ -21,6 +21,8 @@ final class Version20220817052822 extends AbstractMigration
     {
         // this up() migration is auto-generated, please modify it to your needs
         $this->addSql('CREATE TABLE `user` (id INT AUTO_INCREMENT NOT NULL, username VARCHAR(255) NOT NULL, full_name VARCHAR(255) NOT NULL, last_logged_in_at DATETIME DEFAULT NULL, PRIMARY KEY(id)) DEFAULT CHARACTER SET utf8mb4 COLLATE `utf8mb4_unicode_ci` ENGINE = InnoDB');
+
+        $this->addSql("INSERT INTO `user` (id, username, full_name, last_logged_in_at) VALUES (1, 'test@example.com', 'テスト', '2022-08-17 14:32:31')");
     }
 
     public function down(Schema $schema): void
