@@ -29,8 +29,8 @@ class SecurityController
 
     #[Route('/login/fake-google-oauth', name: 'app_fake_google_oauth')]
     #[When(env: 'dev')]
-    public function auth(): array
+    public function auth(): Response
     {
-        return [];
+        return new Response($this->twig->render('/security/dev/fake-google-oauth.html.twig'));
     }
 }

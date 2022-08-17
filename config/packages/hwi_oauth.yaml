@@ -1,14 +1,61 @@
-hwi_oauth:
-    # list of names of the firewalls in which this bundle is active, this setting MUST be set
-    firewall_names: [main]
+when@prod:
+    hwi_oauth:
+        # list of names of the firewalls in which this bundle is active, this setting MUST be set
+        firewall_names: [main]
 
-    # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
-    resource_owners:
-        facebook:
-            type:                facebook
-            client_id:           '%env(FB_ID)%'
-            client_secret:       '%env(FB_SECRET)%'
-            scope:               "email"
-            options:
-                display: popup
-                csrf: true
+        # https://github.com/hwi/HWIOAuthBundle/blob/master/Resources/doc/2-configuring_resource_owners.md
+        resource_owners:
+            google:
+                type:                google
+                client_id:           '%env(GOOGLE_CLIENT_ID)%'
+                client_secret:       '%env(GOOGLE_CLIENT_SECRET)%'
+                scope:               "email profile"
+                paths:
+                    identifier: email
+    services:
+        hwi_oauth.user.provider.entity:
+            class: HWI\Bundle\OAuthBundle\Security\Core\User\EntityUserProvider
+            arguments:
+                - '@doctrine'
+                - 'App\Entity\User'
+                - {google: 'username'}
+        hwi_oauth.user.provider.entity_failsafe:
+            class: App\Service\HWIOAuth\FailSafeEntityUserProvider
+            arguments:
+                - '@hwi_oauth.user.provider.entity'
+                - '@doctrine.orm.entity_manager'
+        hwi_oauth.authentication.entry_point.oauth.main:
+            parent: hwi_oauth.authentication.entry_point.oauth
+            arguments:
+                $loginPath: '/login'
+                $useForward: false
+
+when@dev: &security_dev
+    hwi_oauth:
+        resource_owners:
+            google:
+                type: oauth2
+                class: App\Service\HWIOAuth\Dev\FakeOAuth2ResourceOwner
+                client_id:           '%env(GOOGLE_CLIENT_ID)%'
+                client_secret:       '%env(GOOGLE_CLIENT_SECRET)%'
+                scope: "read"
+                paths:
+                    identifier: username
+    services:
+        hwi_oauth.user.provider.entity:
+            class: App\Service\HWIOAuth\Dev\FakeEntityUserProvider
+            arguments:
+                - '@doctrine'
+                - 'App\Entity\User'
+                - { google: 'username' }
+        hwi_oauth.user.provider.entity_failsafe:
+            class: App\Service\HWIOAuth\FailSafeEntityUserProvider
+            arguments:
+                - '@hwi_oauth.user.provider.entity'
+                - '@doctrine.orm.entity_manager'
+        hwi_oauth.authentication.entry_point.oauth.main:
+            class: App\Service\HWIOAuth\Dev\FakeOAuthEntryPoint
+            arguments:
+                $loginPath: '/login'
+
+when@test: *security_dev
