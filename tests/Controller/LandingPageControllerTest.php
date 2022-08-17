@@ -11,6 +11,12 @@ class LandingPageControllerTest extends WebTestCase
 {
     private ?KernelBrowser $client;
 
+    public function setUp(): void
+    {
+        static::ensureKernelShutdown();
+        $this->client = static::createClient();
+    }
+
     protected function tearDown(): void
     {
         $this->client = null;
@@ -20,9 +26,9 @@ class LandingPageControllerTest extends WebTestCase
 
     public function test_ランディングページへアクセスできること(): void
     {
-        $crawler = $this->client->request('GET', '/');
-
+        $this->client->request('GET', '/');
         $response = $this->client->getResponse();
         $this->assertTrue($response->isOk(), (string) $response->getStatusCode());
+        $this->assertSame('<h1>ランディングページ</h1>', $response->getContent());
     }
 }
