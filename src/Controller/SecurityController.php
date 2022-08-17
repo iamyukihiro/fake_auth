@@ -6,6 +6,7 @@ namespace App\Controller;
 use Symfony\Component\DependencyInjection\Attribute\When;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Twig\Environment;
 
 class SecurityController
 {
@@ -17,7 +18,7 @@ class SecurityController
     #[Route("/login", name: "app_login", methods: ["GET"])]
     public function login(): Response
     {
-        return [];
+        return new Response($this->twig->render('/security/login.html.twig'));
     }
 
     #[Route('/logout', name: 'app_logout', methods: ["GET"])]
