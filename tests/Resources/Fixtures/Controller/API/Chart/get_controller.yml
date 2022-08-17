@@ -1,0 +1,4 @@
+App\Entity\User:
+  user1:
+    username: 'test@example.com'
+    fullName: 'テスト'
