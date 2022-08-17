@@ -10,7 +10,7 @@
 ###< symfony/framework-bundle ###
 
 .idea/
-date/
+/data/
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
