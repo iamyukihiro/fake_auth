@@ -11,7 +11,7 @@ use Twig\Environment;
 class SecurityController
 {
     public function __construct(
-        private Environment $twig
+        private readonly Environment $twig
     ) {
     }
 

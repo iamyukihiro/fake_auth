@@ -7,7 +7,7 @@ namespace App\Tests\Controller;
 use Symfony\Bundle\FrameworkBundle\KernelBrowser;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
-class LandingPageControllerTest extends WebTestCase
+class SecurityControllerTest extends WebTestCase
 {
     private ?KernelBrowser $client;
 
@@ -24,12 +24,10 @@ class LandingPageControllerTest extends WebTestCase
         parent::tearDown();
     }
 
-    public function test_ランディングページへアクセスできること(): void
+    public function test_ログインページへアクセスできること(): void
     {
-        $this->client->request('GET', '/');
+        $this->client->request('GET', '/login');
         $response = $this->client->getResponse();
         $this->assertTrue($response->isOk(), (string) $response->getStatusCode());
-        $this->assertSame('<h1>ランディングページ</h1>
-<a href="/login">ログイン</a>', $response->getContent());
     }
 }
