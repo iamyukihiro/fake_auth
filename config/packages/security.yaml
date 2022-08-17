@@ -6,23 +6,23 @@ when@prod: &security_prod
         providers:
             hwi:
                 id: hwi_oauth.user.provider.entity_failsafe
-            firewalls:
-                main:
-                    lazy: true
-                    provider: hwi
-                    oauth:
-                        resource_owners:
-                            google: "/login/check-google"
-                        login_path: /login
-                        use_forward: false
-                        failure_path: /login
-                        default_target_path: /
-                        oauth_user_provider:
-                            service: hwi_oauth.user.provider.entity_failsafe
-                    logout:
-                        path: app_logout
-                        target: /
-                    entry_point: 'hwi_oauth.authentication.entry_point.oauth.main'
+        firewalls:
+            main:
+                lazy: true
+                provider: hwi
+                oauth:
+                    resource_owners:
+                        google: "/login/check-google"
+                    login_path: /login
+                    use_forward: false
+                    failure_path: /login
+                    default_target_path: /admin/dashboard
+                    oauth_user_provider:
+                        service: hwi_oauth.user.provider.entity_failsafe
+                logout:
+                    path: app_logout
+                    target: /
+                entry_point: 'hwi_oauth.authentication.entry_point.oauth.main'
 
 when@dev: &security_dev
     security:
@@ -39,7 +39,7 @@ when@dev: &security_dev
                     login_path: /login
                     use_forward: false
                     failure_path: /login
-                    default_target_path: /
+                    default_target_path: /admin/dashboard
                     oauth_user_provider:
                         service: hwi_oauth.user.provider.entity_failsafe
                 logout:
