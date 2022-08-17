@@ -11,6 +11,7 @@ class LandingPageController
     #[Route('/', name: 'app_landing_page')]
     public function index(): Response
     {
-        return new Response('<h1>ランディングページ</h1>');
+        return new Response('<h1>ランディングページ</h1>
+<a href="/login">ログイン</a>');
     }
 }

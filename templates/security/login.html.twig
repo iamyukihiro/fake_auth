@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}WebApp | Login{% endblock %}
+
+{% block body %}
+    <section id="twig-login">
+        <div class="content">
+            <h1>WebApp</h1>
+            <div class="btn-area">
+                <a href="{{ path('hwi_oauth_service_redirect', {'service': 'google' }) }}" class="btn">
+                    <span>Googleアカウントでログイン</span>
+                </a>
+            </div>
+        </div>
+    </section>
+{% endblock %}
