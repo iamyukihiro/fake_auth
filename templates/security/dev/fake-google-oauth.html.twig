@@ -1,14 +1,15 @@
 {% extends "base.html.twig" %}
 
-{% block title %}WebApp | Fake Google OAuth{% endblock %}
+{% block title %}Web App | Fake Google OAuth{% endblock %}
 
 {% block body %}
     <section id="twig-login">
         <div class="content">
-            <h1>Fake Google OAuth</h1>
+            <h1>Web App</h1>
+            <h2>Fake Google OAuth</h2>
             <form action="/login/check-google" method="get">
                 <label for="username">username</label>
-                <input style="width: 400px; margin-bottom: 50px" type="text" name="username" id="username" required>
+                <input style="width: 400px; margin-bottom: 50px" type="text" name="username" id="username" placeholder="****@example.com" required>
                 <input type="submit" value="認証する">
             </form>
         </div>

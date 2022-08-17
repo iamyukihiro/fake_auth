@@ -1,0 +1,21 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Web App | LP{% endblock %}
+
+{% block body %}
+    <section id="twig-landing-page">
+        <h1>Web App の ランディングページ</h1>
+        {% if app.user %}
+            <a href="/logout">ログアウト</a>
+        {% else %}
+            <div>
+                <a href="/admin/dashboard">ダッシュボード画面(Admin)</a>
+                <span>を表示する際は、ログインしてください。</span>
+            </div>
+            <br>
+            <a href="/login">ログイン</a>
+        {% endif %}
+    </section>
+{% endblock %}
+
+

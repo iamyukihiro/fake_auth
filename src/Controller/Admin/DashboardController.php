@@ -1,22 +1,24 @@
 <?php
 declare(strict_types=1);
 
-namespace App\Controller;
+namespace App\Controller\Admin;
 
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Twig\Environment;
 
-class LandingPageController
+class DashboardController
 {
     public function __construct(
         private readonly Environment $twig
     ) {
     }
 
-    #[Route('/', name: 'app_landing_page')]
+    #[IsGranted('ROLE_USER')]
+    #[Route('/admin/dashboard', name: 'app_admin_dashboard')]
     public function index(): Response
     {
-        return new Response($this->twig->render('/langing_page.html.twig'));
+        return new Response($this->twig->render('/admin/dashboard.html.twig'));
     }
 }
