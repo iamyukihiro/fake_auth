@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\Exception\CustomUserMessageAuthenticationExc
 use Symfony\Component\Security\Http\Authenticator\AbstractAuthenticator;
 use Symfony\Component\Security\Http\Authenticator\Passport\Passport;
 
-class FakeApiKeyAuthenticator extends AbstractAuthenticator
+class FakeAuthenticator extends AbstractAuthenticator
 {
     public function __construct(
         private readonly UserRepository $userRepository

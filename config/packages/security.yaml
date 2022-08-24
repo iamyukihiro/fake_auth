@@ -47,6 +47,6 @@ when@dev: &security_dev
                     target: /
                 entry_point: 'hwi_oauth.authentication.entry_point.oauth.main'
                 custom_authenticators:
-                    - App\Service\Security\Dev\FakeApiKeyAuthenticator
+                    - App\Service\Security\Dev\FakeAuthenticator
 
 when@test: *security_dev
