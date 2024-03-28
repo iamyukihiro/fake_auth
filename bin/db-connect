@@ -1,2 +1,0 @@
-#!/bin/sh
-mysql -u root -ppass -h 127.0.0.1

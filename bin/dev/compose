@@ -1,0 +1,5 @@
+#!/bin/sh
+cd bin/dev/ || exit
+docker compose up -d
+
+docker exec -itd app sh -c "cd /var/www/html && symfony local:server:ca:install && symfony serve"

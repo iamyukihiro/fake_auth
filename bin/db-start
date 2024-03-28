@@ -1,5 +1,0 @@
-#!/bin/sh
-echo 'Starting DB ...'
-docker run --name fake_oauth_db_mysql8_0 -v ${PWD}/data:/var/lib/mysql \
--p 3306:3306 -e MYSQL_ROOT_PASSWORD=pass -e TZ=Asia/Tokyo \
--d mysql:8.0 --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
