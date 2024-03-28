@@ -9,7 +9,7 @@
         "ext-iconv": "*",
         "doctrine/doctrine-bundle": "^2.12",
         "doctrine/doctrine-migrations-bundle": "^3.2",
-        "doctrine/orm": "^2.13",
+        "doctrine/orm": "^2.19",
         "hwi/oauth-bundle": "^2.0.0-BETA2",
         "phpmentors/domain-commons": "^1.1",
         "symfony/console": "6.4.*",
