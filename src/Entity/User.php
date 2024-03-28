@@ -5,6 +5,7 @@ namespace App\Entity;
 
 use App\Repository\UserRepository;
 use DateTimeInterface;
+use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -15,16 +16,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
-    #[ORM\Column(type: 'integer')]
+    #[ORM\Column(type: Types::INTEGER)]
     private ?int $id;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private ?string $username;
 
-    #[ORM\Column(type: "string", length: 255)]
+    #[ORM\Column(type: Types::STRING, length: 255)]
     private string $fullName;
 
-    #[ORM\Column(type: "datetime", nullable: true)]
+    #[ORM\Column(type: Types::DATETIME_MUTABLE, nullable: true)]
     private ?DateTimeInterface $lastLoggedInAt;
 
     public function getId(): ?int
@@ -32,17 +33,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getUserIdentifier(): string
     {
         return (string) $this->username;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getUsername(): ?string
     {
         return $this->username;
@@ -76,33 +71,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getRoles(): array
     {
         return ['ROLE_USER'];
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getPassword(): ?string
     {
         return $this->username;
     }
 
-    /**
-     * @inheritdoc
-     */
     public function getSalt(): string
     {
         return '';
     }
 
-    /**
-     * @inheritdoc
-     */
     public function eraseCredentials()
     {
         // do nothing
