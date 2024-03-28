@@ -1,0 +1,30 @@
+version: '3.9'
+
+services:
+  app:
+    container_name: app
+    image: ghcr.io/iamyukihiro/php-base:8.1
+    volumes:
+      - type: bind
+        source: ../../
+        target: /var/www/html/
+      - '../../bin/dev/php/conf.d/php.ini:/usr/local/etc/php/conf.d/php_override.ini'
+      - '../../bin/dev/php/certs:/root/.symfony5/certs'
+    ports:
+      - '127.0.0.1:8000:8000/tcp'
+    tty: true
+    depends_on:
+      - db
+    command: symfony server:log
+
+  db:
+    container_name: db
+    image: mysql:8.0
+    volumes:
+      - '../../var/mysql/:/var/lib/mysql/'
+    ports:
+      - '127.0.0.1:3307:3306/tcp'
+    environment:
+      - MYSQL_DATABASE=test
+      - MYSQL_ROOT_PASSWORD=pass
+      - TZ=Asia/Tokyo

@@ -1,3 +1,5 @@
+.idea/
+/bin/dev/php/certs/
 
 ###> symfony/framework-bundle ###
 /.env.local
@@ -8,9 +10,6 @@
 /var/
 /vendor/
 ###< symfony/framework-bundle ###
-
-.idea/
-/data/
 
 ###> symfony/phpunit-bridge ###
 .phpunit.result.cache
