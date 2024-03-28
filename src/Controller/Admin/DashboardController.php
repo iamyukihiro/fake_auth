@@ -3,9 +3,9 @@ declare(strict_types=1);
 
 namespace App\Controller\Admin;
 
-use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Security\Http\Attribute\IsGranted;
 use Twig\Environment;
 
 class DashboardController
