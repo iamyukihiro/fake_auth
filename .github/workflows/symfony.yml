@@ -1,0 +1,37 @@
+name: Symfony
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+          php-version: '8.1'
+
+      - name: Get Composer Cache Directory
+        id: composer-cache
+        run: |
+          echo "name=dir::$(composer config cache-files-dir)" >> ${GITHUB_OUTPUT}
+
+      - uses: actions/cache@v4
+        with:
+          path: ${{ steps.composer-cache.outputs.dir || '~/.cache/composer/files' }}
+          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-composer-
+
+      - name: Install dependencies
+        run: composer install --prefer-dist --no-progress --no-suggest
+
+      - name: Check for Coding Standard
+        run: composer cs
+
+      - name: Check for Test
+        run: composer test
