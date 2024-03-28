@@ -23,8 +23,8 @@ services:
     volumes:
       - '../../var/mysql/:/var/lib/mysql/'
     ports:
-      - '127.0.0.1:3307:3306/tcp'
+      - '127.0.0.1:3310:3306/tcp'
     environment:
-      - MYSQL_DATABASE=test
+      - MYSQL_DATABASE=fake_auth_db
       - MYSQL_ROOT_PASSWORD=pass
       - TZ=Asia/Tokyo
